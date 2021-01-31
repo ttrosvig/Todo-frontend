@@ -18,6 +18,8 @@ const AddTodo = ({ saveTodo }: AddTodoProps) => {
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
+		if (formData === '') return;
+
 		saveTodoFunc(formData);
 		setFormData('');
 	};
