@@ -2,10 +2,12 @@ interface TodoProps {
 	todo: {
 		description: string;
 		completed: boolean;
+		id: number;
+		folder_id: number;
 	};
 	functions: {
 		toggleTodo: (description: string) => void;
-		deleteTodo: (description: string) => void;
+		deleteTodo: (id: number) => Promise<any>;
 	};
 }
 
@@ -19,7 +21,7 @@ const Todo = ({ todo, functions }: TodoProps) => {
 			<div className="flex flex-row jusify-center items-center mx-2">
 				<input type="checkbox" className="h-5 w-5 mx-1" onChange={() => functions.toggleTodo(todo.description)} />
 				{todo.completed ? (
-					<button className="py-2 px-3 bg-blue-900 rounded" onClick={() => functions.deleteTodo(todo.description)}>
+					<button className="py-2 px-3 bg-blue-900 rounded" onClick={() => functions.deleteTodo(todo.id)}>
 						<i className="fas fa-trash text-white" />
 					</button>
 				) : null}

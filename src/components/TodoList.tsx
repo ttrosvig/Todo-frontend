@@ -1,49 +1,53 @@
 import AddTodo from './AddTodo';
 import Todo from './Todo';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { REACT_APP_BASE_URL } from '../variables';
+import { useParams } from 'react-router-dom';
 
 interface TodoItem {
 	description: string;
 	completed: boolean;
+	folder_id: number;
+	id: number;
+}
+
+interface IParamTypes {
+	folderId: string | undefined;
 }
 
 const TodoList = () => {
 	const [ todoItems, setTodoItems ] = useState<TodoItem[]>([]);
 
-	const saveTodo = (todo: string): void => {
-		let currentTodos = [ ...todoItems, { description: todo, completed: false } ];
+	let { folderId } = useParams<IParamTypes>();
 
-		setTodoItems(currentTodos);
+	const addTodo = async (todo: string) => {
+		await axios.post(`${REACT_APP_BASE_URL}/todos`, todo);
 	};
 
-	const findItem = (description: string) => {
-		for (let todo of todoItems) {
-			if (description === todo.description) return todo;
-		}
+	const deleteTodo = async (id: number) => {
+		await axios.delete(`${REACT_APP_BASE_URL}/todos/${id}`);
 	};
 
-	const deleteTodo = (description: string): void => {
-		let items = [ ...todoItems ];
-		let result = items.filter((todo) => todo.description !== description);
+	const toggleTodo = (description: string) => {};
 
-		setTodoItems(result);
-	};
+	useEffect(
+		() => {
+			const getData = async () => {
+				if (!folderId) return;
 
-	const toggleTodo = (description: string): void => {
-		let item = findItem(description);
+				const res = await axios.get(`${REACT_APP_BASE_URL}/todos/folders/${folderId}`);
 
-		if (!item) return;
-
-		item.completed = !item.completed;
-
-		let currentItems = [ ...todoItems ];
-
-		if (item) setTodoItems(currentItems);
-	};
+				setTodoItems(res.data.todos);
+			};
+			getData();
+		},
+		[ todoItems, folderId ]
+	);
 
 	return (
 		<div className="max-w-xl mt-4">
-			<AddTodo saveTodo={saveTodo} />
+			<AddTodo saveTodo={addTodo} />
 			<div>
 				{todoItems.map((item: TodoItem, idx: number) => (
 					<Todo key={idx} todo={item} functions={{ toggleTodo, deleteTodo }} />

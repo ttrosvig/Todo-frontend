@@ -1,18 +1,22 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Folder props structure
 interface IFolderProps {
 	name: string;
+	id: number;
 	removeFunc: () => void;
 }
 
-const Folder = ({ name, removeFunc }: IFolderProps) => {
+const Folder = ({ name, id, removeFunc }: IFolderProps) => {
 	// Piece of state to toggle when mouse enters and leaves
 	const [ isHovering, setIsHovering ] = useState(false);
 
 	return (
 		<div className="bg-blue-900 text-white font-bold p-3 rounded flex flex-row justify-between items-center my-2 w-full">
-			<p>{name}</p>
+			<Link to={`/folder/${id}`}>
+				<p>{name}</p>
+			</Link>
 
 			<button
 				onMouseEnter={() => setIsHovering((isHovering) => !isHovering)}

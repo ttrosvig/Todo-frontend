@@ -21,8 +21,8 @@ const FolderList = () => {
 	};
 
 	// Removes a folder by passing in the folder ID
-	const removeFolder = async (id: number) => {
-		await axios.delete(`${REACT_APP_BASE_URL}/folders/${id}`);
+	const removeFolder = async (folder_id: number) => {
+		await axios.delete(`${REACT_APP_BASE_URL}/folders/${folder_id}`);
 	};
 
 	// Retrieves folders whenever the folders variable is rendered and changes
@@ -55,7 +55,7 @@ const FolderList = () => {
 			)}
 
 			{folders.map((folder: IFolder, idx: number) => {
-				return <Folder key={idx} name={folder.name} removeFunc={() => removeFolder(folder.id)} />;
+				return <Folder id={folder.id} key={idx} name={folder.name} removeFunc={() => removeFolder(folder.id)} />;
 			})}
 		</div>
 	);
