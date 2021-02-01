@@ -31,8 +31,6 @@ const TodoList = () => {
 			completed: !todo.completed,
 			folder_id: Number(todo.folder_id)
 		});
-
-		window.location.reload();
 	};
 
 	useEffect(
