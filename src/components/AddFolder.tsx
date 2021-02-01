@@ -2,24 +2,32 @@ import { useState } from 'react';
 import axios from 'axios';
 import { REACT_APP_BASE_URL } from '../variables';
 
+// AddFolder props structure
 interface IAddFolderProps {
 	addFunc: () => void;
 }
 
 const AddFolder = ({ addFunc }: IAddFolderProps) => {
+	// Piece of state to hold the form data
 	const [ formData, setFormData ] = useState('');
 
+	// Saves current target value to form state when the input value is changed
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setFormData(event.target.value);
 	};
 
+	// Performs certain actions when the form is submitted
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		// Prevents page refresh
 		event.preventDefault();
 
+		// Returns if the form is submitted with an empty string
 		if (formData === '') return;
 
+		// Posts the new folder to the DB
 		await axios.post(`${REACT_APP_BASE_URL}/folders`, { name: formData });
 
+		// Reset the form input
 		setFormData('');
 	};
 

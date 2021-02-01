@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
+// Folder props structure
 interface IFolderProps {
 	name: string;
 	removeFunc: () => void;
 }
 
 const Folder = ({ name, removeFunc }: IFolderProps) => {
+	// Piece of state to toggle when mouse enters and leaves
 	const [ isHovering, setIsHovering ] = useState(false);
 
 	return (

@@ -4,28 +4,35 @@ import { REACT_APP_BASE_URL } from '../variables';
 import Folder from './Folder';
 import AddFolder from './AddFolder';
 
+// Describes the structure of a folder
 interface IFolder {
 	id: number;
 	name: string;
 }
 
 const FolderList = () => {
+	// State variables used for rendering and toggling
 	const [ folders, setFolders ] = useState<any>([]);
 	const [ isAdding, setIsAdding ] = useState(false);
 
+	// Toggles the isAdding state variable
 	const toggleAdding = () => {
 		setIsAdding((isAdding) => !isAdding);
 	};
 
+	// Removes a folder by passing in the folder ID
 	const removeFolder = async (id: number) => {
 		await axios.delete(`${REACT_APP_BASE_URL}/folders/${id}`);
 	};
 
+	// Retrieves folders whenever the folders variable is rendered and changes
 	useEffect(
 		() => {
 			const getData = async () => {
+				// Retrieve all folders from the DB
 				const res = await axios.get(`${REACT_APP_BASE_URL}/folders`);
 
+				// Save folders in state
 				setFolders(res.data.folders);
 			};
 			getData();
