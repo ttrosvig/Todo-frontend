@@ -21,15 +21,19 @@ const TodoList = () => {
 
 	let { folderId } = useParams<IParamTypes>();
 
-	const addTodo = async (todo: string) => {
-		await axios.post(`${REACT_APP_BASE_URL}/todos`, todo);
-	};
-
 	const deleteTodo = async (id: number) => {
 		await axios.delete(`${REACT_APP_BASE_URL}/todos/${id}`);
 	};
 
-	const toggleTodo = (description: string) => {};
+	const toggleTodo = async (todo: ITodoItem) => {
+		await axios.put(`${REACT_APP_BASE_URL}/todos/${todo.id}`, {
+			description: todo.description,
+			completed: !todo.completed,
+			folder_id: Number(todo.folder_id)
+		});
+
+		window.location.reload();
+	};
 
 	useEffect(
 		() => {
@@ -46,8 +50,8 @@ const TodoList = () => {
 	);
 
 	return (
-		<div className="max-w-xl mt-4">
-			<AddTodo saveTodo={addTodo} />
+		<div className="mt-4 w-full">
+			<AddTodo />
 			<div>
 				{todoItems.map((item: ITodoItem, idx: number) => (
 					<Todo key={idx} todo={item} functions={{ toggleTodo, deleteTodo }} />

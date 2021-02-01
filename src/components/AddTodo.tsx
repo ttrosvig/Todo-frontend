@@ -1,26 +1,32 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { REACT_APP_BASE_URL } from '../variables';
+import { useParams } from 'react-router-dom';
 
-interface AddTodoProps {
-	saveTodo: (todo: string) => void;
+interface IParamTypes {
+	folderId: string | undefined;
 }
 
-const AddTodo = ({ saveTodo }: AddTodoProps) => {
+const AddTodo = () => {
 	const [ formData, setFormData ] = useState('');
 
-	const saveTodoFunc = (todo: string) => {
-		saveTodo(todo);
-	};
+	let { folderId } = useParams<IParamTypes>();
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData(event.target.value);
 	};
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		if (formData === '') return;
 
-		saveTodoFunc(formData);
+		await axios.post(`${REACT_APP_BASE_URL}/todos`, {
+			description: formData,
+			completed: false,
+			folder_id: Number(folderId)
+		});
+
 		setFormData('');
 	};
 
