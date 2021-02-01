@@ -5,7 +5,7 @@ import axios from 'axios';
 import { REACT_APP_BASE_URL } from '../variables';
 import { useParams } from 'react-router-dom';
 
-interface TodoItem {
+interface ITodoItem {
 	description: string;
 	completed: boolean;
 	folder_id: number;
@@ -17,7 +17,7 @@ interface IParamTypes {
 }
 
 const TodoList = () => {
-	const [ todoItems, setTodoItems ] = useState<TodoItem[]>([]);
+	const [ todoItems, setTodoItems ] = useState<ITodoItem[]>([]);
 
 	let { folderId } = useParams<IParamTypes>();
 
@@ -49,7 +49,7 @@ const TodoList = () => {
 		<div className="max-w-xl mt-4">
 			<AddTodo saveTodo={addTodo} />
 			<div>
-				{todoItems.map((item: TodoItem, idx: number) => (
+				{todoItems.map((item: ITodoItem, idx: number) => (
 					<Todo key={idx} todo={item} functions={{ toggleTodo, deleteTodo }} />
 				))}
 			</div>

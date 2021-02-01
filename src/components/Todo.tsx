@@ -5,6 +5,7 @@ interface TodoProps {
 		id: number;
 		folder_id: number;
 	};
+
 	functions: {
 		toggleTodo: (description: string) => void;
 		deleteTodo: (id: number) => Promise<any>;
