@@ -2,7 +2,7 @@ import AddTodo from './AddTodo';
 import Todo from './Todo';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { REACT_APP_BASE_URL } from '../variables';
+import { REACT_APP_BASE_URL } from '../../variables';
 import { useParams } from 'react-router-dom';
 
 interface ITodoItem {

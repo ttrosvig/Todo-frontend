@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { REACT_APP_BASE_URL } from '../variables';
+import { REACT_APP_BASE_URL } from '../../variables';
 
 // AddFolder props structure
 interface IAddFolderProps {

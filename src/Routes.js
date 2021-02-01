@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
-import TodoList from './components/TodoList';
-import FolderList from './components/FolderList';
+import TodoList from './components/todos/TodoList';
+import FolderList from './components/folders/FolderList';
 
 const Routes = () => {
 	return (

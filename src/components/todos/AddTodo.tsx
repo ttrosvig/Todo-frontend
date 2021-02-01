@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { REACT_APP_BASE_URL } from '../variables';
+import { REACT_APP_BASE_URL } from '../../variables';
 import { useParams } from 'react-router-dom';
 
 interface IParamTypes {
