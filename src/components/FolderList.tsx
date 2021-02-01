@@ -5,6 +5,7 @@ import Folder from './Folder';
 import AddFolder from './AddFolder';
 
 interface IFolder {
+	id: number;
 	name: string;
 }
 
@@ -14,6 +15,10 @@ const FolderList = () => {
 
 	const toggleAdding = () => {
 		setIsAdding((isAdding) => !isAdding);
+	};
+
+	const removeFolder = async (id: number) => {
+		await axios.delete(`${REACT_APP_BASE_URL}/folders/${id}`);
 	};
 
 	useEffect(
@@ -33,7 +38,9 @@ const FolderList = () => {
 			{isAdding ? (
 				<AddFolder addFunc={toggleAdding} />
 			) : (
-				<div className="flex flex-row justify-end">
+				<div className="flex flex-row justify-end items-center">
+					<p className="text-white mx-1 font-bold">Add Folder</p>
+
 					<button className="py-2 px-3 bg-blue-900 rounded-full text-white" onClick={toggleAdding}>
 						<i className="fas fa-plus" />
 					</button>
@@ -41,7 +48,7 @@ const FolderList = () => {
 			)}
 
 			{folders.map((folder: IFolder, idx: number) => {
-				return <Folder key={idx} name={folder.name} />;
+				return <Folder key={idx} name={folder.name} removeFunc={() => removeFolder(folder.id)} />;
 			})}
 		</div>
 	);

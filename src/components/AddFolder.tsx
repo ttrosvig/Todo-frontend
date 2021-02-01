@@ -16,6 +16,8 @@ const AddFolder = ({ addFunc }: IAddFolderProps) => {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
+		if (formData === '') return;
+
 		await axios.post(`${REACT_APP_BASE_URL}/folders`, { name: formData });
 
 		setFormData('');
