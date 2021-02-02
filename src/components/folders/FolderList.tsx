@@ -46,9 +46,12 @@ const FolderList = () => {
 				<AddFolder addFunc={toggleAdding} />
 			) : (
 				<div className="flex flex-row justify-end items-center">
-					<p className="text-white mx-1 font-bold">Add Folder</p>
+					<p className="text-blue-900 mx-1 font-bold">Add Folder</p>
 
-					<button className="py-2 px-3 bg-blue-900 rounded-full text-white" onClick={toggleAdding}>
+					<button
+						className="py-2 px-3 bg-gradient-to-r to-blue-900 from-pink-900 rounded-full text-white"
+						onClick={toggleAdding}
+					>
 						<i className="fas fa-plus" />
 					</button>
 				</div>

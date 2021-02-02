@@ -35,10 +35,13 @@ const AddFolder = ({ addFunc }: IAddFolderProps) => {
 		<form className="flex flex-row justify-center" onSubmit={handleSubmit}>
 			<input type="text" className="p-2 w-4/6" onChange={handleChange} value={formData} />
 
-			<button className="p-2 bg-blue-900 text-white rounded w-1/6">
+			<button className="p-2 bg-gradient-to-r to-blue-900 from-pink-900 text-white rounded w-1/6 mr-2">
 				<i className="fas fa-check" />
 			</button>
-			<button onClick={addFunc} className="py-2 px-3 bg-blue-900 rounded text-white w-1/6">
+			<button
+				onClick={addFunc}
+				className="py-2 px-3 bg-gradient-to-r to-blue-900 from-pink-900 rounded text-white w-1/6"
+			>
 				<i className="fas fa-times" />
 			</button>
 		</form>

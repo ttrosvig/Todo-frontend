@@ -48,7 +48,7 @@ const TodoList = () => {
 	);
 
 	return (
-		<div className="mt-4 w-full">
+		<div className="mt-4 w-1/2">
 			<AddTodo />
 			<div>
 				{todoItems.map((item: ITodoItem, idx: number) => (

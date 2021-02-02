@@ -39,7 +39,7 @@ const AddTodo = () => {
 				onChange={handleChange}
 				autoFocus
 			/>
-			<button className="text-white bg-blue-900 py-1 px-3 rounded shadow-md hover:bg-blue-900 transition delay-100">
+			<button className="text-white bg-gradient-to-r to-blue-900 from-pink-900 py-1 px-3 rounded shadow-md ">
 				Add
 			</button>
 		</form>

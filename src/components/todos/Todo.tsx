@@ -21,7 +21,7 @@ interface ITodoProps {
 
 const Todo = ({ todo, functions }: ITodoProps) => {
 	return (
-		<div className="flex flex-row justify-between items-center border-2 border-blue-900 p-1 bg-blue-400 rounded my-2 shadow-md hover:bg-pink-900 transition delay-100">
+		<div className="flex flex-row justify-between items-center p-2 bg-blue-900 rounded my-2 shadow-md hover:bg-pink-900 transition delay-100">
 			<div className="font-bold text-white">
 				<p className={todo.completed ? 'line-through' : 'no-underline'}>{todo.description}</p>
 			</div>
@@ -34,7 +34,10 @@ const Todo = ({ todo, functions }: ITodoProps) => {
 					checked={todo.completed}
 				/>
 				{todo.completed ? (
-					<button className="py-2 px-3 bg-blue-900 rounded" onClick={() => functions.deleteTodo(todo.id)}>
+					<button
+						className="py-2 px-3 ml-2 bg-gradient-to-r to-blue-900 from-pink-900 rounded"
+						onClick={() => functions.deleteTodo(todo.id)}
+					>
 						<i className="fas fa-trash text-white" />
 					</button>
 				) : null}
