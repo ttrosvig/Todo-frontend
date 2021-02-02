@@ -30,4 +30,10 @@ const Folder = ({ name, id, removeFunc }: IFolderProps) => {
 	);
 };
 
+Folder.defaultProps = {
+	name: 'Test',
+	id: 1,
+	removeFunc: () => null
+};
+
 export default Folder;

@@ -48,4 +48,8 @@ const AddFolder = ({ addFunc }: IAddFolderProps) => {
 	);
 };
 
+AddFolder.defaultProps = {
+	addFunc: () => null
+};
+
 export default AddFolder;

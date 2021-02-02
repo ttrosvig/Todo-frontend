@@ -46,4 +46,17 @@ const Todo = ({ todo, functions }: ITodoProps) => {
 	);
 };
 
+Todo.defaultProps = {
+	todo: {
+		description: 'Test',
+		folder_id: 1,
+		id: 1,
+		completed: false
+	},
+	functions: {
+		toggleTodo: () => null,
+		deleteTodo: () => null
+	}
+};
+
 export default Todo;
