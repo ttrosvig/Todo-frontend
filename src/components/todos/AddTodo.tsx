@@ -3,24 +3,31 @@ import { useState } from 'react';
 import { REACT_APP_BASE_URL } from '../../variables';
 import { useParams } from 'react-router-dom';
 
+// Type for URL var
 interface IParamTypes {
 	folderId: string | undefined;
 }
 
 const AddTodo = () => {
+	// Piece of state to hold todo description
 	const [ formData, setFormData ] = useState('');
 
+	// Get the folderId from the URL
 	let { folderId } = useParams<IParamTypes>();
 
+	// onChange func
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData(event.target.value);
 	};
 
+	// onSubmit func
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
+		// Return if the input is empty
 		if (formData === '') return;
 
+		// Post the new todo
 		await axios.post(`${REACT_APP_BASE_URL}/todos`, {
 			description: formData,
 			completed: false,

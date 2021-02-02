@@ -10,3 +10,12 @@ it('should render without crashing', () => {
 		</Router>
 	);
 });
+
+it('should match the snapshot', () => {
+	const { asFragment } = render(
+		<Router>
+			<Folder />
+		</Router>
+	);
+	expect(asFragment).toMatchSnapshot();
+});

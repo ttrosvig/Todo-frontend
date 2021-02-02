@@ -5,6 +5,7 @@ interface ITodo {
 	folder_id: number;
 }
 
+// Todo props structure
 interface ITodoProps {
 	todo: {
 		description: string;

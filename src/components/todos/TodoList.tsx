@@ -5,6 +5,7 @@ import axios from 'axios';
 import { REACT_APP_BASE_URL } from '../../variables';
 import { useParams } from 'react-router-dom';
 
+// Structure of todo
 interface ITodoItem {
 	description: string;
 	completed: boolean;
@@ -12,19 +13,24 @@ interface ITodoItem {
 	id: number;
 }
 
+// Type for url var
 interface IParamTypes {
 	folderId: string | undefined;
 }
 
 const TodoList = () => {
+	// Piece of state to store todos
 	const [ todoItems, setTodoItems ] = useState<ITodoItem[]>([]);
 
+	// Get the folderId from the URL
 	let { folderId } = useParams<IParamTypes>();
 
+	// Deletes a todo by id
 	const deleteTodo = async (id: number) => {
 		await axios.delete(`${REACT_APP_BASE_URL}/todos/${id}`);
 	};
 
+	// Toggles the todo completion status
 	const toggleTodo = async (todo: ITodoItem) => {
 		await axios.put(`${REACT_APP_BASE_URL}/todos/${todo.id}`, {
 			description: todo.description,
@@ -36,8 +42,10 @@ const TodoList = () => {
 	useEffect(
 		() => {
 			const getData = async () => {
+				// Return if there is no folderId
 				if (!folderId) return;
 
+				// Get todos that have the current folderId
 				const res = await axios.get(`${REACT_APP_BASE_URL}/todos/folders/${folderId}`);
 
 				setTodoItems(res.data.todos);
