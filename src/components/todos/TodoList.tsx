@@ -40,19 +40,22 @@ const TodoList = () => {
 		setTodoItems([ ...filtered, editedTodo.data.todo ]);
 	};
 
-	useEffect(() => {
-		const getData = async () => {
-			// Return if there is no folderId
-			if (!folderId) return;
+	useEffect(
+		() => {
+			const getData = async () => {
+				// Return if there is no folderId
+				if (!folderId) return;
 
-			// Get todos that have the current folderId
-			const res = await axios.get(`${REACT_APP_BASE_URL}/todos/folders/${folderId}`);
+				// Get todos that have the current folderId
+				const res = await axios.get(`${REACT_APP_BASE_URL}/todos/folders/${folderId}`);
 
-			// Save todos in state
-			setTodoItems(res.data.todos);
-		};
-		getData();
-	}, []);
+				// Save todos in state
+				setTodoItems(res.data.todos);
+			};
+			getData();
+		},
+		[ folderId ]
+	);
 
 	return (
 		<div className="mt-4 w-1/2">
