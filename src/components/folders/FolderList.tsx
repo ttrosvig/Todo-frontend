@@ -14,6 +14,7 @@ const FolderList = () => {
 	// State variables used for rendering and toggling
 	const [ folders, setFolders ] = useState<any>([]);
 	const [ isAdding, setIsAdding ] = useState(false);
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	// Toggles the isAdding state variable
 	const toggleAdding = () => {
@@ -29,6 +30,8 @@ const FolderList = () => {
 	useEffect(
 		() => {
 			const getData = async () => {
+				setIsLoading(true);
+
 				// Retrieve all folders from the DB
 				const res = await axios.get(`${REACT_APP_BASE_URL}/folders`);
 
@@ -36,6 +39,7 @@ const FolderList = () => {
 				setFolders(res.data.folders);
 			};
 			getData();
+			setIsLoading(false);
 		},
 		[ folders ]
 	);
@@ -56,6 +60,12 @@ const FolderList = () => {
 					</button>
 				</div>
 			)}
+
+			{isLoading ? (
+				<div className="text-pink-900 flex flex-row justify-center">
+					<i className="fas fa-spinner animate-spin text-5xl" />
+				</div>
+			) : null}
 
 			{folders.map((folder: IFolder, idx: number) => {
 				return <Folder id={folder.id} key={idx} name={folder.name} removeFunc={() => removeFolder(folder.id)} />;
