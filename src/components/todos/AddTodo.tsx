@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useState } from 'react';
 import { REACT_APP_BASE_URL } from '../../variables';
 import { useParams } from 'react-router-dom';
+import { IParamTypes } from '../../Interfaces';
 
-// Type for URL var
-interface IParamTypes {
-	folderId: string | undefined;
+// AddTodo props structure
+interface IAddTodoProps {
+	saveTodo: (newTodo: any) => void;
 }
 
-const AddTodo = () => {
+const AddTodo = ({ saveTodo }: IAddTodoProps) => {
 	// Piece of state to hold todo description
 	const [ formData, setFormData ] = useState('');
 
@@ -28,12 +29,13 @@ const AddTodo = () => {
 		if (formData === '') return;
 
 		// Post the new todo
-		await axios.post(`${REACT_APP_BASE_URL}/todos`, {
+		let newTodo = await axios.post(`${REACT_APP_BASE_URL}/todos`, {
 			description: formData,
 			completed: false,
 			folder_id: Number(folderId)
 		});
 
+		saveTodo(newTodo.data.todo);
 		setFormData('');
 	};
 

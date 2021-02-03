@@ -1,9 +1,4 @@
-interface ITodo {
-	description: string;
-	completed: boolean;
-	id: number;
-	folder_id: number;
-}
+import { ITodoItem } from '../../Interfaces';
 
 // Todo props structure
 interface ITodoProps {
@@ -15,7 +10,7 @@ interface ITodoProps {
 	};
 
 	functions: {
-		toggleTodo: (todo: ITodo) => void;
+		toggleTodo: (todo: ITodoItem) => void;
 		deleteTodo: (id: number) => Promise<any>;
 	};
 }
