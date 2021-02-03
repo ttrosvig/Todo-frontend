@@ -25,13 +25,13 @@ const Todo = ({ todo, functions }: ITodoProps) => {
 			<div className="flex flex-row jusify-center items-center mx-2">
 				<input
 					type="checkbox"
-					className="h-5 w-5 mx-1"
+					className="h-5 w-5 mx-1 toggle"
 					onChange={() => functions.toggleTodo(todo)}
 					checked={todo.completed}
 				/>
 				{todo.completed ? (
 					<button
-						className="py-2 px-3 ml-2 bg-gradient-to-r to-blue-900 from-pink-900 rounded"
+						className="py-2 px-3 ml-2 bg-gradient-to-r to-blue-900 from-pink-900 rounded delete"
 						onClick={() => functions.deleteTodo(todo.id)}
 					>
 						<i className="fas fa-trash text-white" />

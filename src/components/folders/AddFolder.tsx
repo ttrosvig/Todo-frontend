@@ -45,7 +45,7 @@ const AddFolder = ({ addFunc, submitFunc }: IAddFolderProps) => {
 
 			<button
 				onClick={addFunc}
-				className="py-2 px-3 bg-gradient-to-r to-blue-900 from-pink-900 rounded text-white w-1/6 cancel-folder"
+				className="py-2 px-3 bg-gradient-to-r to-blue-900 from-pink-900 rounded text-white w-1/6"
 			>
 				<i className="fas fa-times" />
 			</button>
